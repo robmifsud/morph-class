@@ -1,0 +1,6 @@
+Dataset Questions:
+    ☐ Particular objects have more than one corresponding image. Using rec. dataset, these have a common classification so it will be assumed that they have all been classified to one class.
+
+Pandas Questions:
+    ☐ Is it good practice to use inplace=True?
+    ✔ Pandas reading csv in scientific notation @done (20/10/2022, 00:35:00)

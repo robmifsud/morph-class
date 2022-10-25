@@ -5,7 +5,7 @@
 import parameters as param
 import pandas as pd
 
-def merge(frames):
+def merge(frames : pd.DataFrame):
 
     # Removing features which do not concern our research
     for index, frame in enumerate(frames):
@@ -19,6 +19,7 @@ def merge(frames):
     # Removing rows with no dr7objid as these cannot be mapped to an image
     merge = merge.dropna(axis=0, how='any', subset=['dr7objid'])
 
+    # Example of where to use logger.debug
     # print(merge)
 
     return merge
@@ -26,6 +27,7 @@ def merge(frames):
 def remove_duplicates(df):
 
     # Removing duplicates, if any
+    # Example of where to place logger.info
     df = df.drop_duplicates(subset=['dr7objid'])
     
     return df

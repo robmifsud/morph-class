@@ -1,6 +1,15 @@
-# Custom ignore command
-Data/
-SafeForExcel/
+# Custom ignore commands
+Data/*.csv
+Data/Archives/*.zip
+Data/Archives/*.gz
+Data/GZ2 - Images/images_gz2
+Data/GZ2 - Images/
+Data/GZ2 - Images/gz2_filename_mapping.csv
+Data/gz2sample/*.csv
+Data/temp/*.csv
+SafeForExcel/*.csv
+
+## Ready-made gitignore template for python (https://github.com/github/gitignore/blob/main/Python.gitignore)
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

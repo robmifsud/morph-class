@@ -35,4 +35,4 @@ gz2_hart = clean.remove_duplicates(gz2_hart)
 classifications = pd.merge(mapping, gz2_hart, on='dr7objid', suffixes=("_map", None))
 print(classifications)
 
-classifications.to_csv(param.dir_data + 'temp\\class_with_map.csv', index=False)
+classifications.to_csv(param.path_gz2_merge, index=False)

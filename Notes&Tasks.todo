@@ -1,6 +1,19 @@
-Dataset Questions:
-    ☐ Particular objects have more than one corresponding image. Using rec. dataset, these have a common classification so it will be assumed that they have all been classified to one class.
+General:
+    ✔ Add as collaborator? @done (20/10/2022, 12:20:06)
+    ✔ Data files as being ignored at the moment @done (20/10/2022, 12:20:08)
+    ☐ use logger with multiple flags(debug, info, error etc.), you can use python's included logger
+    - info used to give progress reports during runtime
+    - set log files as well if necessary
+    - set flag in main.py
+    ✔ for file paths use os.path.join (and , as delim) @done (25/10/2022, 15:03:22)
 
-Pandas Questions:
-    ☐ Is it good practice to use inplace=True?
+Dataset:
+    ✔ Particular objects have more than one corresponding image. Using rec. dataset, these have a common classification so it will be assumed that they have all been classified to one class. @done (25/10/2022, 15:03:40)
+    ✔ Leave dataset directories in github as well, but ignore .csv files @done (25/10/2022, 15:30:24)
+    ✔ Give info of where to get datasets in readMe file @done (25/10/2022, 15:38:46)
+
+Pandas:
+    ☐ Check for code for instances where makes sense to use inplace
+    - Is it good practice to use inplace=True?
+    - Use inplace for intermediate datasets
     ✔ Pandas reading csv in scientific notation @done (20/10/2022, 00:35:00)

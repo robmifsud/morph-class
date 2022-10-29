@@ -1,6 +1,7 @@
 ## Custom
 *.todo
 .vscode/
+Zotero_export_dumps/
 
 ## UM Template files
 other/

@@ -1,4 +1,5 @@
 # Custom ignore commands
+.vscode/
 Data/*.csv
 Data/Archives/*.zip
 Data/Archives/*.gz

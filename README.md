@@ -3,7 +3,7 @@ Author: Robert Mifsud
 
 Supervisor: Joseph Bonello
 
-Code used for the development of GalaxyZoo2 images morphological classification. Developed as part of a Final Year Project for B.Sc. IT - Software Development at the University of Malta
+Code used for the development of galaxy morphology classification. Developed as part of a Final Year Project for B.Sc. IT - Software Development at the University of Malta
 
 ## Datasets
 
@@ -12,3 +12,6 @@ Images used to train classifier along with mapping to the Galaxy Zoo classificat
 
 ### Classifications
 Classification datasets can be acquired from the Galaxy Zoo [data releases site](https://data.galaxyzoo.org/). The relevant dataset is under GalazyZoo2 - Table 1.
+
+## Documentation
+The write-up for this project is written in LaTeX and can be found in the [LaTeX/](LaTeX) directory.

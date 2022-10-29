@@ -17,7 +17,7 @@ def merge(frames : pd.DataFrame):
     # print(merge)
 
     # Removing rows with no dr7objid as these cannot be mapped to an image
-    merge = merge.dropna(axis=0, how='any', subset=['dr7objid'])
+    merge.dropna(axis=0, how='any', subset=['dr7objid'], inplace=True)
 
     # Example of where to use logger.debug
     # print(merge)
@@ -28,7 +28,7 @@ def remove_duplicates(df):
 
     # Removing duplicates, if any
     # Example of where to place logger.info
-    df = df.drop_duplicates(subset=['dr7objid'])
+    df.drop_duplicates(subset=['dr7objid'], inplace=True)
     
     return df
 

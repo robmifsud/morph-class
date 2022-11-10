@@ -14,7 +14,7 @@ dir_temp = os.path.join(dir_data, "temp")
 ## Paths to datasets
 
 # Images
-path_images = os.path.join(dir_data, 'GZ2 - Images', 'images_gz2')
+path_images = os.path.join(dir_data, 'GZ2 - Images', 'images_gz2', 'images')
 
 # Mapping between images and classifications
 path_mapping = os.path.join(dir_data, 'GZ2 - Images', 'gz2_filename_mapping.csv')
@@ -76,3 +76,6 @@ gz2_11_class_regex = {
                         'SBc': '^SBc.*$',
                         'SBd': '^SBd.*$'
 }
+
+## Path to models
+dir_models = os.path.join(dir_data, 'Models')

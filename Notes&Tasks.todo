@@ -1,3 +1,15 @@
+Packages & Libraries:
+    ☐ TensorFlow GPU 2.6.0
+    ☐ TensorFlow/base 2.6.0
+    - Setting up new Environment and using tutorial @(https://www.tensorflow.org/install/pip#step-by-step_instructions) seemed to work fine.
+    - Seems to be no need for NVIDIA CUDA and cudnn, just the conda packages with the same names was sufficient.
+
+BSOD fixes:
+    ✔ Updating drivers from 'EasyDriver' @done (10/11/2022, 10:37:31)
+    ✔ Open Intel Driver tool and update uhd drivers @done (10/11/2022, 10:37:31)
+    ☐ Next time it happens, check C:/Windows/Minidump and run 'WinDBG' software to analyse .dmp file
+    
+
 General:
     ✔ Add as collaborator? @done (20/10/2022, 12:20:06)
     ✔ Data files as being ignored at the moment @done (20/10/2022, 12:20:08)
@@ -25,3 +37,18 @@ Pandas:
     - Is it good practice to use inplace=True?
     - Use inplace for intermediate datasets
     ✔ Pandas reading csv in scientific notation @done (20/10/2022, 00:35:00)
+
+Training:
+    ✔ What form for the dataset do you recommend? Keep it in tf.data.DataSet or use numpy array/ tensors @done (03/11/2022, 13:21:36)
+
+Training-Time(CPU):
+    - GoogleNet : 1 epoch 12-13 hours
+    - LeNet: 1 epoch 9-10 hours
+    - In Dieleman paper, training was done on GTX 680 (2GB vram, similar spec) and took ~60 hours. However images were cropped and scaled signifcantly.
+
+Environment Setup:
+    ✔ Create new test env @done (10/11/2022, 10:37:49)
+    ✔ Add necessary packages/ libraries @done (10/11/2022, 10:37:49)
+    ✔ Make sure everything is in order @done (10/11/2022, 10:37:50)
+    ☐ Rename test env to 'fyp'
+    ☐ Run scripts using new env

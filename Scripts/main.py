@@ -41,11 +41,13 @@ gz2_hart = clean.remove_duplicates(gz2_hart)
 classifications = pd.merge(mapping, gz2_hart, on='dr7objid', suffixes=("_map", None))
 logging.debug(f"\n{classifications.head()}\n")
 logging.debug(f"{len(classifications)}\n")
-# print(classifications)
 
 classifications.to_csv(param.path_gz2_merge, index=False)
 
+# Print class proportions
 split.get_proportions(param.gz2_3_class_regex, classifications)
 split.get_proportions(param.gz2_7_class_regex, classifications)
 split.get_proportions(param.gz2_9_class_regex, classifications)
 split.get_proportions(param.gz2_11_class_regex, classifications)
+
+split_dataset = split.split_by_class(param.gz2_3_class_regex, classifications)

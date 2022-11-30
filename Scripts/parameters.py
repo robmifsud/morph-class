@@ -3,6 +3,16 @@
 # Function: Used to store static values used throughout the script, for ease of use in case anything needs changing
 
 import os
+from datetime import datetime
+from tensorflow.keras import metrics
+
+# Runtime variables
+MODEL = 'Inception_v1'
+RESIZE = True
+OG_IMAGE_SIZE = 424
+IMAGE_SIZE = 224
+BATCH_SIZE = 32
+NEW_WEIGHTS = True
 
 # Current path
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -77,5 +87,18 @@ gz2_11_class_regex = {
                         'SBd': '^SBd.*$'
 }
 
+# Training metrics
+metrics = [metrics.Accuracy(), metrics.Precision(), metrics.Recall(), metrics.MeanSquaredError(), metrics.MeanAbsoluteError()]
+
 ## Path to models
 dir_models = os.path.join(dir_data, 'Models')
+
+# Path to weights
+dir_weights = os.path.join(dir_data, 'Weights')
+
+# Path to terminal output directory
+dir_terminal = os.path.join(dir_data, 'Terminal')
+
+# Path to terminal output file
+dt = datetime.now()
+path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{dt.date()}_{dt.hour};{dt.minute}.out')

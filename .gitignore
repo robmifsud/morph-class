@@ -8,8 +8,16 @@ Data/GZ2 - Images/
 Data/GZ2 - Images/gz2_filename_mapping.csv
 Data/gz2sample/*.csv
 # Data/temp/*.csv
-Data/temp/
+Data/temp/*
 SafeForExcel/*.csv
+Data/Terminal/*
+
+# Model and weight directories
+Data/Models/Inception_v1/*
+Data/Models/LeNet/*
+
+Data/Weights/Inception_v1/*
+Data/Weights/LeNet/*
 
 ## Ready-made gitignore template for python (https://github.com/github/gitignore/blob/main/Python.gitignore)
 

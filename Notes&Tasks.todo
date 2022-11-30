@@ -9,7 +9,6 @@ BSOD fixes:
     ✔ Open Intel Driver tool and update uhd drivers @done (10/11/2022, 10:37:31)
     ☐ Next time it happens, check C:/Windows/Minidump and run 'WinDBG' software to analyse .dmp file
     
-
 General:
     ✔ Add as collaborator? @done (20/10/2022, 12:20:06)
     ✔ Data files as being ignored at the moment @done (20/10/2022, 12:20:08)
@@ -31,6 +30,8 @@ Dataset:
     ✔ Particular objects have more than one corresponding image. Using rec. dataset, these have a common classification so it will be assumed that they have all been classified to one class. @done (25/10/2022, 15:03:40)
     ✔ Leave dataset directories in github as well, but ignore .csv files @done (25/10/2022, 15:30:24)
     ✔ Give info of where to get datasets in readMe file @done (25/10/2022, 15:38:46)
+    ☐ Hubble fork diagram
+    
 
 Pandas:
     ✔ Check for code for instances where makes sense to use inplace @done (26/10/2022, 00:14:00)
@@ -40,15 +41,26 @@ Pandas:
 
 Training:
     ✔ What form for the dataset do you recommend? Keep it in tf.data.DataSet or use numpy array/ tensors @done (03/11/2022, 13:21:36)
+    ☐ First few epochs return oom, but everything fine after that.
+    - Fixed by using smaller batch size (32), would it make sense to use 64 if first few epochs don't train?
+    ☐ Issues with Google Drive, uploading
+    - try https://www.youtube.com/watch?v=UuFv6iEVzRg for uploading
+    ☐ Zipped file worked much better
+    ☐ Google colab, free version slow
+    ☐ Interrupt
+
+    ☐ Add additional metrics to evaluation (precision, recall, f1-score, msa, mean square error, mean absolute error) and plot sensitivity/TPR
 
 Training-Time(CPU):
     - GoogleNet : 1 epoch 12-13 hours
-    - LeNet: 1 epoch 9-10 hours
     - In Dieleman paper, training was done on GTX 680 (2GB vram, similar spec) and took ~60 hours. However images were cropped and scaled signifcantly.
+    ☐ Try DataMiner?
+    - LeNet: 1 epoch 3 mins
+    - Exception_v1 : 1 epoch 20 mins
 
 Environment Setup:
     ✔ Create new test env @done (10/11/2022, 10:37:49)
     ✔ Add necessary packages/ libraries @done (10/11/2022, 10:37:49)
     ✔ Make sure everything is in order @done (10/11/2022, 10:37:50)
     ☐ Rename test env to 'fyp'
-    ☐ Run scripts using new env
+    ✔ Run scripts using new env @done (10/11/2022, 12:48:19)

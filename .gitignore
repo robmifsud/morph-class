@@ -12,6 +12,9 @@ Data/temp/*
 SafeForExcel/*.csv
 Data/Terminal/*
 
+Miscellanous or experimental scripts
+Scripts/misc/*
+
 # Model and weight directories
 Data/Models/Inception_v1/*
 Data/Models/LeNet/*

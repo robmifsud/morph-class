@@ -38,7 +38,7 @@ def Inception_block(input_layer, f1, f2_conv1, f2_conv3, f3_conv1, f3_conv5, f4)
 def GoogLeNet():
   # input layer 
   # input_layer = Input(shape = (224, 224, 3))
-  input_layer = Input(shape = (424, 424, 3))
+  input_layer = Input(shape = (69, 69, 3))
 
   # convolutional layer: filters = 64, kernel_size = (7,7), strides = 2
   X = Conv2D(filters = 64, kernel_size = (7,7), strides = 2, padding = 'valid', activation = 'relu')(input_layer)

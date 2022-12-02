@@ -5,14 +5,19 @@
 import os
 from datetime import datetime
 from tensorflow.keras import metrics
+from tensorflow_addons.metrics import F1Score
 
-# Runtime variables
+# Runtime variables !IMPORTANT!
+
 MODEL = 'Inception_v1'
+# MODEL = 'LeNet'
 RESIZE = True
 OG_IMAGE_SIZE = 424
 IMAGE_SIZE = 224
 BATCH_SIZE = 32
-NEW_WEIGHTS = True
+LOAD_MODEL = False
+LOAD_WEIGHTS = True
+NUM_CLASSES = 3
 
 # Current path
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -88,7 +93,7 @@ gz2_11_class_regex = {
 }
 
 # Training metrics
-metrics = [metrics.Accuracy(), metrics.Precision(), metrics.Recall(), metrics.MeanSquaredError(), metrics.MeanAbsoluteError()]
+metrics = [metrics.Accuracy(), metrics.Precision(), metrics.Recall(), metrics.MeanSquaredError(), metrics.MeanAbsoluteError(), F1Score(NUM_CLASSES)]
 
 ## Path to models
 dir_models = os.path.join(dir_data, 'Models')
@@ -101,4 +106,4 @@ dir_terminal = os.path.join(dir_data, 'Terminal')
 
 # Path to terminal output file
 dt = datetime.now()
-path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{dt.date()}_{dt.hour};{dt.minute}.out')
+path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{dt.date()}_{dt.hour};{dt.minute}.csv')

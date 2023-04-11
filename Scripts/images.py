@@ -5,6 +5,7 @@ import parameters as param
 import os
 import re
 import logging
+import math
 import shutil
 
 from typing import Dict
@@ -20,7 +21,7 @@ def resize(im : Image.Image):
         right = 315
         bottom = 315
     else:
-        x = (param.OG_IMAGE_SIZE - param.IMAGE_SIZE)/2
+        x = math.floor((param.OG_IMAGE_SIZE - param.IMAGE_SIZE)/2)
         left = x
         top = x
         right = param.IMAGE_SIZE + x
@@ -35,7 +36,6 @@ def resize(im : Image.Image):
     
     # Shows the image in image viewer
     # im.show()
-    # test = im.size
 
     return im
 
@@ -44,7 +44,7 @@ def get_images(classes: Dict[str, str], map : pd.DataFrame):
     for key in classes.keys():
         folder_name += '_' + key
 
-    folder_name += f'_{param.IMAGE_SIZE}x{param.IMAGE_SIZE}'
+    folder_name += f'_{param.IMAGE_SIZE}x{param.IMAGE_SIZE}_a_03'
     
     path_folder = os.path.join(param.dir_temp, folder_name)
 
@@ -52,11 +52,6 @@ def get_images(classes: Dict[str, str], map : pd.DataFrame):
         logging.info(f'Directory {path_folder} already exists')
     else:
         os.mkdir(path_folder)
-
-    # try:
-    #     os.mkdir(path_folder)
-    # except FileExistsError:
-    #     logging.exception(f'Directory {path_folder} already exists')
 
     for key in classes.keys():
         path_temp = os.path.join(path_folder, key)
@@ -66,48 +61,43 @@ def get_images(classes: Dict[str, str], map : pd.DataFrame):
         else:
             os.mkdir(path_temp)
 
-        # try:
-        #     os.mkdir(path_temp)
-        # except FileExistsError:
-        #     logging.exception(f'Directory {path_temp} already exists')
-
-    # images = Path(folder_dir).glob('*.png')
     images = Path(param.path_images).glob('*.jpg')
     list_images = list(images)
-    # print(len(list_images))
 
     no_classification_count = 0
 
+    # loop through images in directory
     for image in tqdm(list_images, total=len(list_images)):
+        # Get image file name for asset id
         img_id_str = os.path.basename(image).split('.')[0]
         img_id  = int(img_id_str)
 
+        # Open image with PIL library
         im = Image.open(os.path.join(param.dir_path, image))
 
         # RESIZE
         if param.RESIZE:
             im = resize(im)
         
+        # Get row from mapping with matching asset_id
         obj_row = map[map['asset_id'] == img_id]
         obj_class = None
 
         if len(obj_row) != 0:
+            # Get gz2 class for image in question
             obj_class = obj_row.iloc[0]['gz2class']
         else:
             no_classification_count += 1
             continue
-
+        
+        # Loop through classes in current classification schema
         for gz2_class, regex in classes.items():
+            # if image gz2_class matches regex, put image under relevant directory
             if bool(re.search(regex, obj_class)):
                 file_name = img_id_str + '.jpg'
                 dst_dir = os.path.join(path_folder, gz2_class, file_name)
 
                 # shutil.copy(image, dst_dir)
                 im.save(dst_dir) 
-
-        # print(obj_row.head())
-        # print(obj_class)
-
-        # print(img_id)
         
     logging.debug(f'No classification count {no_classification_count}')

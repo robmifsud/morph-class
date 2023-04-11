@@ -5,6 +5,7 @@
 import parameters as param
 import pandas as pd
 
+# Experimental only, for non gz2_hart classifications
 def merge(frames : pd.DataFrame):
 
     # Removing features which do not concern our research
@@ -24,6 +25,21 @@ def merge(frames : pd.DataFrame):
 
     return merge
 
+def clean_fields_3_class(df : pd.DataFrame):
+    # Removing features which do not concern our research
+    df = df[['dr7objid','ra','dec','rastring','decstring','sample','gz2class','total_classifications','total_votes',
+             't01_smooth_or_features_a01_smooth_count', 't01_smooth_or_features_a01_smooth_fraction', 't01_smooth_or_features_a02_features_or_disk_count', 't01_smooth_or_features_a02_features_or_disk_fraction', 't01_smooth_or_features_a03_star_or_artifact_count', 't01_smooth_or_features_a03_star_or_artifact_fraction',
+             't03_bar_a06_bar_count', 't03_bar_a06_bar_fraction', 't03_bar_a07_no_bar_count', 't03_bar_a07_no_bar_fraction',
+             't04_spiral_a08_spiral_count', 't04_spiral_a08_spiral_fraction', 't04_spiral_a09_no_spiral_count', 't04_spiral_a09_no_spiral_fraction']]
+    
+    return df
+
+# Clean data frame columns but keep agreement values
+def clean_fields_ag(df : pd.DataFrame):
+    df = df[['dr7objid','asset_id','gz2class','total_classifications','total_votes','agreement']]
+    
+    return df
+
 def remove_duplicates(df):
 
     # Removing duplicates, if any
@@ -31,17 +47,3 @@ def remove_duplicates(df):
     df.drop_duplicates(subset=['dr7objid'], inplace=True)
     
     return df
-
-
-# # Removing features which do not concern our research
-# gz2_spec_clean = gz2_spec[['dr8objid','dr7objid','ra','dec','rastring','decstring','sample','gz2class','total_classifications','total_votes']]
-# gz2_photo_clean = gz2_photo[['dr8objid','dr7objid','ra','dec','rastring','decstring','sample','gz2class','total_classifications','total_votes']]
-
-# # Merging datframes
-# gz2_merge = pd.concat([gz2_spec_clean, gz2_photo_clean], ignore_index=True)
-# print(gz2_merge)
-
-# # Removing duplicates, if any. None so far(19/10/2022)
-# gz2_merge = gz2_merge.drop_duplicates(subset=['dr7objid'])
-
-# print(gz2_merge)

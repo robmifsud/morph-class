@@ -74,11 +74,12 @@ def InceptionV1():
     x1 = Dropout(0.4)(x1)
     x1 = Dense(units=1000, activation='relu')(x1)
     x1 = Dense(units=3, activation='softmax')(x1)
+    # x1 = Dense(units=1, activation='softmax')(x1)
 
     model = Model(input_layer, [x1 , x2 , x3] , name='InceptionV1')
     return model
 
 
-model = InceptionV1()
+# model = InceptionV1()
 
-model.summary()
+# model.summary()

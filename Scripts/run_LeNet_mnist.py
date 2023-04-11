@@ -5,6 +5,7 @@ import tensorflow as tf
 
 from models.lenet import LeNet
 
+
 csv_logger = tf.keras.callbacks.CSVLogger(param.path_terminal_output)
 
 logging.basicConfig(format='%(levelname)s : %(message)s', level=logging.DEBUG)
@@ -30,10 +31,10 @@ def process_images(image, label):
 
 # https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory
 full_dataset : tf.data.Dataset = tf.keras.utils.image_dataset_from_directory(
-    path,
+    "./mnist",
     labels='inferred',
     # batch_size=param.BATCH_SIZE,
-    batch_size=1,
+    batch_size=2,
     label_mode='categorical',
     color_mode='rgb',
     image_size=(69, 69),
@@ -41,7 +42,7 @@ full_dataset : tf.data.Dataset = tf.keras.utils.image_dataset_from_directory(
 )
 
 # shuffle dataset
-full_dataset.shuffle(250000, seed=123, reshuffle_each_iteration=False)
+full_dataset.shuffle(2, seed=123, reshuffle_each_iteration=False)
 
 
 # sample_dataset = full_dataset.take(size)
@@ -55,9 +56,9 @@ full_dataset.shuffle(250000, seed=123, reshuffle_each_iteration=False)
 # val_dataset = test_dataset.skip(test_size)
 # test_dataset = test_dataset.take(test_size)
 
-train_dataset = full_dataset.take(2)
+# train_dataset = full_dataset.take(16)
 
-train_dataset = (train_dataset.map(process_images))
+full_dataset = (full_dataset.map(process_images))
 
 # Test one batch and see if model overfits
 # train_dataset = train_dataset.take(1)
@@ -80,7 +81,7 @@ model = None
 if not param.LOAD_MODEL:
     logging.info(f'Compiling new {param.MODEL} model')
 
-    model = LeNet((69, 69, 3), 3)
+    model = LeNet((69, 69, 3), 2)
 
     model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
 
@@ -95,7 +96,7 @@ else:
 
 # model.fit(train_dataset, epochs=param.EPOCHS, validation_data=val_dataset, verbose=1, callbacks=[earlystopping, cp_callback, csv_logger])
 # Training without saving weights, logs or validation
-model.fit(train_dataset, epochs=param.EPOCHS, verbose=1, callbacks=[])
+model.fit(full_dataset, epochs=param.EPOCHS, verbose=1, callbacks=[])
 
 # result = model.evaluate(test_dataset)
 

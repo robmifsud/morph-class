@@ -11,9 +11,13 @@ Data/gz2sample/*.csv
 Data/temp/*
 SafeForExcel/*.csv
 Data/Terminal/*
+Data/CasJobs
+LaTeX
 
-Miscellanous or experimental scripts
+# Miscellanous or experimental scripts
 Scripts/misc/*
+Scripts/CCE/
+mnist/
 
 # Model and weight directories
 Data/Models/Inception_v1/*
@@ -21,6 +25,12 @@ Data/Models/LeNet/*
 
 Data/Weights/Inception_v1/*
 Data/Weights/LeNet/*
+
+# Notes
+*.todo
+
+# Saved plots
+Data/Plots
 
 ## Ready-made gitignore template for python (https://github.com/github/gitignore/blob/main/Python.gitignore)
 

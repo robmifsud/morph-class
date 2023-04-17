@@ -13,6 +13,7 @@ from tensorflow_addons.metrics import F1Score
 # Runtime variables !IMPORTANT!
 
 # MODEL = 'Inception_v1'
+# MODEL = 'inception_v3'
 # MODEL = 'LeNet'
 MODEL = 'Sanchez'
 # MODEL = 'AlexNet'
@@ -25,23 +26,29 @@ AUGMENT = True
 OPTIMIZER = Adam()
 # OPTIMIZER = RMSprop()
 # load last saved model, including weights
-LOAD_MODEL = False
+LOAD_MODEL = True
 
 # if not loading model, then you can load last saved weights
 # LOAD_WEIGHTS = False
 # SAVE_MODEL = True
 
 # Dataset variables
+# BALANCE = 'imbalanced'
+BALANCE = 'under'
+# BALANCE = 'over'
 # UNBATCHED_SIZE = 239029 # Full dataset
 # UNBATCHED_SIZE = 20
-UNBATCHED_SIZE = 120432 # classification reduced with a(p) >= 0.3 & v >= 5
+UNBATCHED_SIZE = 120432 # classification reduced with a(p) >= 0.3 & v >= 5 (training set)
 # NUM_CLASSES = 2
 NUM_CLASSES = 3
+
+# For gen datasets
 RESIZE = True
 OG_IMAGE_SIZE = 424
-IMAGE_SIZE = 69
+# IMAGE_SIZE = 69
 # IMAGE_SIZE = 224
 # IMAGE_SIZE = 227
+IMAGE_SIZE = 299
 
 # Current path
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -122,7 +129,7 @@ gz2_11_class_regex = {
 
 # Training metrics
 # metrics = [metrics.Accuracy(), metrics.Precision(), metrics.Recall(), metrics.MeanSquaredError(), metrics.MeanAbsoluteError(), F1Score(NUM_CLASSES)]
-metrics = ['accuracy', metrics.Precision(), metrics.Recall(), metrics.MeanSquaredError(), metrics.MeanAbsoluteError()]
+metrics = ['accuracy', metrics.Precision(), metrics.Recall(), metrics.MeanSquaredError(), metrics.MeanAbsoluteError(), metrics.AUC(multi_label=False, from_logits=False)]
 
 ## Path to models
 dir_models = os.path.join(dir_data, 'Models')
@@ -135,4 +142,4 @@ dir_terminal = os.path.join(dir_data, 'Terminal')
 
 # Path to terminal output file
 dt = datetime.now()
-path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{NUM_CLASSES}class_{dt.date()}_{dt.hour};{dt.minute}.csv')
+path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{NUM_CLASSES}class_{BALANCE}_{dt.date()}_{dt.hour};{dt.minute}.csv')

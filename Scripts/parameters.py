@@ -12,10 +12,11 @@ from tensorflow_addons.metrics import F1Score
 
 # Runtime variables !IMPORTANT!
 
-# MODEL = 'Inception_v1'
 # MODEL = 'inception_v3'
+# MODEL = 'Xception'
+MODEL = 'VGG19'
 # MODEL = 'LeNet'
-MODEL = 'Sanchez'
+# MODEL = 'Sanchez'
 # MODEL = 'AlexNet'
 
 EPOCHS = 250
@@ -142,7 +143,7 @@ dir_terminal = os.path.join(dir_data, 'Terminal')
 
 # Path to terminal output file
 dt = datetime.now()
-path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{NUM_CLASSES}class_{BALANCE}_b{BATCH_SIZE}_{dt.date()}_{dt.hour};{dt.minute}.csv')
+path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{NUM_CLASSES}class_{BALANCE}_b{BATCH_SIZE}_{dt.date()}.csv')
 
 # LaTeX line width (inches), has to bee reduced to account for spacing between figures!
 LINEWIDTH = 5.82652

@@ -16,8 +16,11 @@ np.random.seed(123)
 # dir_ds = os.path.join(param.dir_temp, 'images_E_S_SB_227x227_a_03_train')
 # dir_ds_test = os.path.join(param.dir_temp, 'images_E_S_SB_227x227_a_03_test')
 
-dir_ds = os.path.join(param.dir_temp, 'images_E_S_SB_299x299_a_03_train')
-dir_ds_test = os.path.join(param.dir_temp, 'images_E_S_SB_299x299_a_03_test')
+# dir_ds = os.path.join(param.dir_temp, 'images_E_S_SB_299x299_a_03_train')
+# dir_ds_test = os.path.join(param.dir_temp, 'images_E_S_SB_299x299_a_03_test')
+
+dir_ds = os.path.join(param.dir_temp, 'images_E_S_SB_224x224_a_03_train')
+dir_ds_test = os.path.join(param.dir_temp, 'images_E_S_SB_224x224_a_03_test')
 
 sub_dirs = [f.path for f in os.scandir(dir_ds) if f.is_dir()]
 

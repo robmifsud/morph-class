@@ -5,7 +5,7 @@ import tensorflow as tf
 
 # Custom scripts and methods
 import parameters as param
-from run_methods import get_class_weights, visualize, normalise_images, confusion_matrix, resample, evaluate, get_ds_len, get_class_dist
+from run_methods import get_class_weights, visualize_ds, normalise_images, confusion_matrix, resample, evaluate, get_ds_len, get_class_dist
 from models.sanchez import sanchez
 
 csv_logger = tf.keras.callbacks.CSVLogger(param.path_terminal_output)
@@ -42,7 +42,7 @@ if param.NORMALISE:
     logging.info(f'✓ - Dataset normalized')
 
 # Visualize dataset
-# visualize(full_dataset)
+# visualize_ds(full_dataset)
 
 train_size = int(0.8888 * size)
 
@@ -53,10 +53,11 @@ logging.info(f'Train dist: {get_class_dist(train_dataset, train_size)}')
 
 logging.info(f'✓ - Dataset loaded and split')
 
-train_dataset = resample(ds=train_dataset, target_dist=[0.333,0.333,0.333])
+# train_dataset = resample(ds=train_dataset, target_dist=[0.333,0.333,0.333])
 
 train_dataset = train_dataset.repeat().batch(param.BATCH_SIZE)
-steps = math.ceil(27109/param.BATCH_SIZE)
+# steps = math.ceil(27109/param.BATCH_SIZE)
+steps = math.ceil(120432/param.BATCH_SIZE)
 logging.info(f'Steps: {steps}')
 
 val_dataset = val_dataset.batch(param.BATCH_SIZE)
@@ -66,8 +67,8 @@ val_dataset = val_dataset.batch(param.BATCH_SIZE)
 # int_test_dataset = test_dataset.shuffle(buffer_size=13381, reshuffle_each_iteration=False)
 # test_dataset = int_test_dataset.repeat().batch(param.BATCH_SIZE)
 
-path_model = os.path.join(param.dir_models, 'Sanchez')
-# path_model = os.path.join(param.dir_models, 'Sanchez_under')
+# path_model = os.path.join(param.dir_models, 'Sanchez_imbalanced')
+path_model = os.path.join(param.dir_models, 'Sanchez_under')
 
 # Callbacks
 earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=10, restore_best_weights=True, verbose=1)
@@ -105,7 +106,8 @@ test_dataset : tf.data.Dataset = tf.keras.utils.image_dataset_from_directory(
     image_size=(69, 69)
 )
 
-test_dataset = test_dataset.map(normalise_images)
+if param.NORMALISE:
+    test_dataset = test_dataset.map(normalise_images)
 
 # Print confusion matrix
 confusion_matrix(model, test_dataset, class_names)

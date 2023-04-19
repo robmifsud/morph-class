@@ -5,7 +5,7 @@ import tensorflow as tf
 
 # Custom scripts and methods
 import parameters as param
-from run_methods import get_class_weights, visualize, normalise_images, confusion_matrix, resample, evaluate, get_ds_len, get_class_dist
+from run_methods import get_class_weights, visualize_ds, normalise_images, confusion_matrix, resample, evaluate, get_ds_len, get_class_dist
 
 csv_logger = tf.keras.callbacks.CSVLogger(param.path_terminal_output)
 
@@ -41,7 +41,7 @@ if param.NORMALISE:
     logging.info(f'✓ - Dataset normalized')
 
 # Visualize dataset
-# visualize(full_dataset)
+# visualize_ds(full_dataset)
 
 train_size = int(0.8888 * size)
 

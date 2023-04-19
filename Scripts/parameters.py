@@ -46,9 +46,9 @@ NUM_CLASSES = 3
 RESIZE = True
 OG_IMAGE_SIZE = 424
 # IMAGE_SIZE = 69
-# IMAGE_SIZE = 224
+IMAGE_SIZE = 224
 # IMAGE_SIZE = 227
-IMAGE_SIZE = 299
+# IMAGE_SIZE = 299
 
 # Current path
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -142,4 +142,7 @@ dir_terminal = os.path.join(dir_data, 'Terminal')
 
 # Path to terminal output file
 dt = datetime.now()
-path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{NUM_CLASSES}class_{BALANCE}_{dt.date()}_{dt.hour};{dt.minute}.csv')
+path_terminal_output = os.path.join(dir_terminal, f'{MODEL}_{NUM_CLASSES}class_{BALANCE}_b{BATCH_SIZE}_{dt.date()}_{dt.hour};{dt.minute}.csv')
+
+# LaTeX line width (inches), has to bee reduced to account for spacing between figures!
+LINEWIDTH = 5.82652

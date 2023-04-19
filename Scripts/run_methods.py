@@ -1,6 +1,19 @@
-import logging, math
+import logging, math, matplotlib
+import pandas as pd
 import numpy as np
 import tensorflow as tf
+matplotlib.use("pgf")
+matplotlib.rcParams.update({
+    "pgf.texsystem": "pdflatex",
+    'font.family': 'sans-serif',
+    'axes.labelsize': 8,
+    'xtick.labelsize' : 8,
+    'ytick.labelsize': 8,
+    'legend.fontsize': 8,
+    'text.usetex': True,
+    'pgf.rcfonts': False,
+})
+
 import matplotlib.pyplot as plt
 import parameters as param
 from tqdm import tqdm
@@ -50,7 +63,7 @@ def get_ds_len(ds: tf.data.Dataset):
     return len(labels)
 
 # Visualize sample of dataset
-def visualize(num_imgs, ds : tf.data.Dataset, class_names):
+def visualize_ds(num_imgs, ds : tf.data.Dataset, class_names):
     # logging.info(f'Class Names: {class_names}')
     plt.figure(figsize=(10, 10))
     # ds = ds.take(1)
@@ -116,7 +129,7 @@ def confusion_matrix(model : tf.keras.Model, ds: tf.data.Dataset, class_names):
             row.append(str(confusion_matrix[i, j].numpy().tolist()))
         print('\t'.join(row))
 
-# Undersampling dataset to make all class counts equal to minority class ocunts
+# Undersampling dataset to make all class counts equal to minority class counts. (not in use)
 def undersampling(ds : tf.data.Dataset):
     # This code is not efficient enough to be feasable as is
     np.empty
@@ -180,6 +193,7 @@ def resample(ds: tf.data.Dataset, target_dist):
 
     return ds_resample
 
+# not in use
 def undersample(ds: tf.data.Dataset):
     # Get the unique class labels
     unique_labels = [0,1,2]
@@ -207,3 +221,35 @@ def evaluate(model: tf.keras.Model, ds: tf.data.Dataset):
     metrics = model.metrics_names
     for i in range(len(results)):
         logging.info(f'{metrics[i]}:\t{results[i]}')
+
+def visualize_history(df: pd.DataFrame, width: float):
+    # Create a figure with two subplots
+    # fig, axs = plt.subplots(2, figsize=(5,10))
+
+    # Loss x Epochs
+    plt.figure(figsize=(width, width))
+    plt.plot(df['loss'], c='royalblue', label='Training')
+    plt.plot(df['val_loss'], c='orange', label='Validation')
+    # plt.title('Loss history')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.ylim([0, 1.5])
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig('history_loss_test.pgf')
+
+    # Acc. x Epochs
+    plt.figure(figsize=(width, width))
+    plt.plot(df['accuracy'], c='royalblue', label='Training')
+    plt.plot(df['val_accuracy'], c='orange', label='Validation')
+    # plt.title('Accuracy history')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig('history_acc_test.pgf')
+
+    # add some spacing between the subplots
+    # fig.tight_layout()
+
+    # fig.savefig('history_test.jpg', dpi=300)

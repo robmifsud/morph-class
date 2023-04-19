@@ -44,7 +44,7 @@ def get_images(classes: Dict[str, str], map : pd.DataFrame):
     for key in classes.keys():
         folder_name += '_' + key
 
-    folder_name += f'_{param.IMAGE_SIZE}x{param.IMAGE_SIZE}_a_03'
+    folder_name += f'_{param.IMAGE_SIZE}x{param.IMAGE_SIZE}_a_03_train'
     
     path_folder = os.path.join(param.dir_temp, folder_name)
 

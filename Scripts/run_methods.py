@@ -222,32 +222,38 @@ def evaluate(model: tf.keras.Model, ds: tf.data.Dataset):
     for i in range(len(results)):
         logging.info(f'{metrics[i]}:\t{results[i]}')
 
-def visualize_history(df: pd.DataFrame, width: float):
+def visualize_history(df: pd.DataFrame, width: float, name: str):
     # Create a figure with two subplots
     # fig, axs = plt.subplots(2, figsize=(5,10))
+
+    length = df.shape[0]
 
     # Loss x Epochs
     plt.figure(figsize=(width, width))
     plt.plot(df['loss'], c='royalblue', label='Training')
     plt.plot(df['val_loss'], c='orange', label='Validation')
+    plt.axvline(x=(length-21), linestyle='--', color='black', label='EarlyStopping')
     # plt.title('Loss history')
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.ylim([0, 1.5])
     plt.legend()
     plt.tight_layout()
-    plt.savefig('history_loss_test.pgf')
+    plt.savefig(f'{name}_loss_history.pgf')
+    plt.savefig(f'{name}_loss_history.jpg', dpi=300)
 
     # Acc. x Epochs
     plt.figure(figsize=(width, width))
     plt.plot(df['accuracy'], c='royalblue', label='Training')
     plt.plot(df['val_accuracy'], c='orange', label='Validation')
+    plt.axvline(x=(length-21), linestyle='--', color='black', label='EarlyStopping')
     # plt.title('Accuracy history')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
     plt.legend()
     plt.tight_layout()
-    plt.savefig('history_acc_test.pgf')
+    plt.savefig(f'{name}_acc_history.pgf')
+    plt.savefig(f'{name}_acc_history.jpg', dpi=300)
 
     # add some spacing between the subplots
     # fig.tight_layout()

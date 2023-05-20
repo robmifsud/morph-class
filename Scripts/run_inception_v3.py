@@ -33,6 +33,14 @@ full_dataset : tf.data.Dataset = tf.keras.utils.image_dataset_from_directory(
     seed=123
 )
 
+data_generator = tf.keras.preprocessing.image.ImageDataGenerator(
+    rotation_range=45,
+    width_shift_range=0.05,
+    height_shift_range=0.05,
+    horizontal_flip=True,
+    vertical_flip=True
+)
+
 class_names = full_dataset.class_names
 
 # Normalise
@@ -57,6 +65,8 @@ train_dataset = resample(ds=train_dataset, target_dist=[0.333,0.333,0.333])
 len_train = get_ds_len(train_dataset)
 logging.info(f'Length of train set: {len_train}')
 train_dataset = train_dataset.repeat().batch(param.BATCH_SIZE)
+if param.AUGMENT:
+    train_dataset = train_dataset.map(lambda x, y: (data_generator.random_transform(x, seed=123), y))
 steps = math.ceil(len_train/param.BATCH_SIZE)
 logging.info(f'Steps: {steps}')
 

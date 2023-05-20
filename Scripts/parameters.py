@@ -15,7 +15,6 @@ from tensorflow_addons.metrics import F1Score
 # MODEL = 'inception_v3'
 # MODEL = 'Xception'
 MODEL = 'VGG19'
-# MODEL = 'LeNet'
 # MODEL = 'Sanchez'
 # MODEL = 'AlexNet'
 
@@ -81,7 +80,6 @@ path_gz2_merge = os.path.join(dir_temp, "class_with_map.csv")
 gz2_3_class         = ['E', 'S', 'SB']
 gz2_3_class_regex   = {
                         'E' : '^E.*$', 
-                        # 'S' : '^S[^B]+$', bug here as includes Se(edge-on) galaxies?
                         'S' : '^S[^Be]+$',
                         'SB': '^SB.*$'
 }
@@ -92,7 +90,6 @@ gz2_7_class_regex = {
                         'Sa' : '^Sa.*$',
                         'Sb' : '^Sb.*$',
                         'Sc' : '^Sc.*$',
-                        # 'Se' : '^Se.*$',
                         'SBa': '^SBa.*$',
                         'SBb': '^SBb.*$',
                         'SBc': '^SBc.*$'
@@ -105,7 +102,6 @@ gz2_9_class_regex = {
                         'Sb' : '^Sb.*$',
                         'Sc' : '^Sc.*$',
                         'Sd' : '^Sd.*$',
-                        # 'Se' : '^Se.*$',
                         'SBa': '^SBa.*$',
                         'SBb': '^SBb.*$',
                         'SBc': '^SBc.*$',
@@ -121,7 +117,6 @@ gz2_11_class_regex = {
                         'Sb' : '^Sb.*$',
                         'Sc' : '^Sc.*$',
                         'Sd' : '^Sd.*$',
-                        # 'Se' : '^Se.*$',
                         'SBa': '^SBa.*$',
                         'SBb': '^SBb.*$',
                         'SBc': '^SBc.*$',

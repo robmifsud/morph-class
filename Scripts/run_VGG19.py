@@ -25,7 +25,7 @@ size = param.UNBATCHED_SIZE
 full_dataset : tf.data.Dataset = tf.keras.utils.image_dataset_from_directory(
     path,
     labels='inferred',
-    shuffle=True, # reshuffle_each_iteration default to True meaning order will be different each iteration, useful for Training but tricky for Testing
+    shuffle=True,
     batch_size=None,
     label_mode='categorical',
     color_mode='rgb',

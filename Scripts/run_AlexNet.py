@@ -6,7 +6,7 @@ import tensorflow as tf
 # Custom scripts and methods
 import parameters as param
 from models.AlexNet import AlexNet
-from run_methods import get_class_weights, visualize_ds, normalise_images, confusion_matrix, resample, evaluate, get_ds_len, get_class_dist
+from run_methods import get_class_weights, visualize_ds, normalise_images, confusion_matrix, resample, evaluate, get_ds_len, get_class_dist, get_metrics
 
 csv_logger = tf.keras.callbacks.CSVLogger(param.path_terminal_output)
 
@@ -19,8 +19,6 @@ logging.info(physical_devices)
 path = os.path.join(param.dir_temp, 'images_E_S_SB_227x227_a_03_train')
 
 size = param.UNBATCHED_SIZE
-
-# size = math.ceil(unbatched_size / param.BATCH_SIZE)
 
 full_dataset : tf.data.Dataset = tf.keras.utils.image_dataset_from_directory(
     path,
@@ -47,7 +45,8 @@ val_dataset = full_dataset.skip(train_size)
 
 logging.info(f'✓ - Dataset loaded and split')
 
-train_dataset = resample(ds=train_dataset, target_dist=[0.333,0.333,0.333])
+if param.BALANCE == 'under':
+    train_dataset = resample(ds=train_dataset, target_dist=[0.333,0.333,0.333])
 
 train_dataset = train_dataset.repeat().batch(param.BATCH_SIZE)
 steps = math.ceil(27109/param.BATCH_SIZE)
@@ -58,7 +57,7 @@ val_dataset = val_dataset.batch(param.BATCH_SIZE)
 # Visualize
 # visualize_ds(16, train_dataset, class_names)
 
-path_model = os.path.join(param.dir_models, 'AlexNet')
+path_model = os.path.join(param.dir_models, f'AlexNet_{param.BALANCE}')
 
 # Callbacks
 earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=10, restore_best_weights=True, verbose=1)
@@ -88,7 +87,7 @@ path = os.path.join(param.dir_temp, 'images_E_S_SB_227x227_a_03_test')
 test_dataset : tf.data.Dataset = tf.keras.utils.image_dataset_from_directory(
     path,
     labels='inferred',
-    shuffle=False, # reshuffle_each_iteration default to True meaning order will be different each iteration, useful for Training but tricky for Testing
+    shuffle=False,
     batch_size=param.BATCH_SIZE,
     label_mode='categorical',
     color_mode='rgb',
@@ -101,39 +100,5 @@ if param.NORMALISE:
 # Print confusion matrix
 confusion_matrix(model=model, ds=test_dataset, class_names=class_names)
 
-# Evaluate
-evaluate(model, test_dataset)
-
-# Create a figure with two subplots
-fig, axs = plt.subplots(2, 2)
-
-# Loss x Epochs
-axs[0, 0].plot(history.history['loss'])
-axs[0, 0].set_title('Training Loss')
-axs[0, 0].set_xlabel('Epoch')
-axs[0, 0].set_ylabel('Loss')
-axs[0, 0].set_ylim([0,2])
-
-# Acc. x Epochs
-axs[0, 1].plot(history.history['accuracy'])
-axs[0, 1].set_title('Training Accuracy')
-axs[0, 1].set_xlabel('Epoch')
-axs[0, 1].set_ylabel('Accuracy')
-
-# Val_Loss. x Epochs
-axs[1, 0].plot(history.history['val_loss'])
-axs[1, 0].set_title('Validation Loss')
-axs[1, 0].set_xlabel('Epoch')
-axs[1, 0].set_ylabel('Loss')
-axs[1, 0].set_ylim([0,2])
-
-# Val_Acc. x Epochs
-axs[1, 1].plot(history.history['val_accuracy'])
-axs[1, 1].set_title('Validation Accuracy')
-axs[1, 1].set_xlabel('Epoch')
-axs[1, 1].set_ylabel('Accuracy')
-
-# add some spacing between the subplots
-fig.tight_layout()
-
-plt.show()
+# Report
+logging.info(f'Report:\n{get_metrics(model, test_dataset, class_names)}')

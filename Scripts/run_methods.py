@@ -18,6 +18,7 @@ import matplotlib.pyplot as plt
 import parameters as param
 from tqdm import tqdm
 from sklearn.utils.class_weight import compute_class_weight
+from sklearn.metrics import classification_report
 
 def get_class_weights(ds : tf.data.Dataset):
     all_labels = []
@@ -128,6 +129,17 @@ def confusion_matrix(model : tf.keras.Model, ds: tf.data.Dataset, class_names):
         for j in range(len(class_names)):
             row.append(str(confusion_matrix[i, j].numpy().tolist()))
         print('\t'.join(row))
+
+def get_metrics(model: tf.keras.Model, ds: tf.data.Dataset, class_names):
+    # Predict labels
+    y_pred = model.predict(ds)
+    y_pred = tf.argmax(y_pred, axis=1)
+
+    # Actual labels
+    y_true = tf.concat([y for x, y in ds], axis=0)
+    y_true = tf.argmax(y_true, axis=1)
+
+    return(classification_report(y_true=y_true, y_pred=y_pred, target_names=class_names, digits=3, zero_division=0))
 
 # Undersampling dataset to make all class counts equal to minority class counts. (not in use)
 def undersampling(ds : tf.data.Dataset):

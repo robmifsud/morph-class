@@ -6,10 +6,10 @@ matplotlib.use("pgf")
 matplotlib.rcParams.update({
     "pgf.texsystem": "pdflatex",
     'font.family': 'sans-serif',
-    'axes.labelsize': 8,
-    'xtick.labelsize' : 8,
-    'ytick.labelsize': 8,
-    'legend.fontsize': 8,
+    'axes.labelsize': 11,
+    'xtick.labelsize' : 10,
+    'ytick.labelsize': 10,
+    'legend.fontsize': 10,
     'text.usetex': True,
     'pgf.rcfonts': False,
 })
@@ -235,9 +235,6 @@ def evaluate(model: tf.keras.Model, ds: tf.data.Dataset):
         logging.info(f'{metrics[i]}:\t{results[i]}')
 
 def visualize_history(df: pd.DataFrame, width: float, name: str):
-    # Create a figure with two subplots
-    # fig, axs = plt.subplots(2, figsize=(5,10))
-
     length = df.shape[0]
 
     # Loss x Epochs
@@ -251,8 +248,8 @@ def visualize_history(df: pd.DataFrame, width: float, name: str):
     plt.ylim([0, 1.5])
     plt.legend()
     plt.tight_layout()
-    plt.savefig(f'{name}_loss_history.pgf')
-    plt.savefig(f'{name}_loss_history.jpg', dpi=300)
+    plt.savefig(f'plots/{name}_loss_history.pgf')
+    # plt.savefig(f'plots/{name}_loss_history.jpg', dpi=300)
 
     # Acc. x Epochs
     plt.figure(figsize=(width, width))
@@ -264,10 +261,5 @@ def visualize_history(df: pd.DataFrame, width: float, name: str):
     plt.ylabel('Accuracy')
     plt.legend()
     plt.tight_layout()
-    plt.savefig(f'{name}_acc_history.pgf')
-    plt.savefig(f'{name}_acc_history.jpg', dpi=300)
-
-    # add some spacing between the subplots
-    # fig.tight_layout()
-
-    # fig.savefig('history_test.jpg', dpi=300)
+    plt.savefig(f'plots/{name}_acc_history.pgf')
+    # plt.savefig(f'plots/{name}_acc_history.jpg', dpi=300)

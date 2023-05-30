@@ -75,7 +75,7 @@ logging.info(f'Steps: {steps}')
 
 val_dataset = val_dataset.batch(param.BATCH_SIZE)
 
-path_model = os.path.join(param.dir_models, f'inception_v3_{param.BALANCE}')
+path_model = os.path.join(param.dir_models, f'Inception_v3_{param.BALANCE}')
 
 # Callbacks
 earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=30, restore_best_weights=True, verbose=1)

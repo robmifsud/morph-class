@@ -12,9 +12,9 @@ from tensorflow_addons.metrics import F1Score
 
 # Runtime variables !IMPORTANT!
 
-# MODEL = 'inception_v3'
+MODEL = 'inception_v3'
 # MODEL = 'Xception'
-MODEL = 'VGG19'
+# MODEL = 'VGG19'
 # MODEL = 'Sanchez'
 # MODEL = 'AlexNet'
 
@@ -26,15 +26,11 @@ AUGMENT = True
 OPTIMIZER = Adam()
 # OPTIMIZER = RMSprop()
 # load last saved model, including weights
-LOAD_MODEL = True
-
-# if not loading model, then you can load last saved weights
-# LOAD_WEIGHTS = False
-# SAVE_MODEL = True
+LOAD_MODEL = False
 
 # Dataset variables
-# BALANCE = 'imbalanced'
-BALANCE = 'under'
+BALANCE = 'imbalanced'
+# BALANCE = 'under'
 # BALANCE = 'over'
 # UNBATCHED_SIZE = 239029 # Full dataset
 # UNBATCHED_SIZE = 20
@@ -65,7 +61,7 @@ path_images = os.path.join(dir_data, 'GZ2 - Images', 'images_gz2', 'images')
 # Mapping between images and classifications
 path_mapping = os.path.join(dir_data, 'GZ2 - Images', 'gz2_filename_mapping.csv')
 
-# GZ2 classifications
+# GZ2 classifications. _hart are the ones used in this project, the others were only used for testing purposes.
 path_gz2_hart = os.path.join(dir_data,  'gz2_hart16.csv')
 path_gz2_spec = os.path.join(dir_data, 'zoo2MainSpecz.csv')
 path_gz2_photo = os.path.join(dir_data, 'zoo2MainPhotoz.csv')

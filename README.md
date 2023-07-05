@@ -1,6 +1,6 @@
 <!-- 
     I recommend you open this file in an editor supporting markdown such as vscode which has an inbuilt preview feature (top right corner).
-    https://stackedit.io/app work well too, but directory/file links will naturally not work.
+    https://stackedit.io/app works well too, but directory/file links will naturally not work.
  -->
 
 # Morphological Classification of SDSS Galaxies Using Machine Learning Techniques

@@ -8,9 +8,7 @@ Data/GZ2 - Images/
 Data/GZ2 - Images/gz2_filename_mapping.csv
 Data/gz2sample/*.csv
 # Data/temp/*.csv
-Data/temp/*
 SafeForExcel/*.csv
-Data/Terminal/*
 Data/CasJobs
 LaTeX
 

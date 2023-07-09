@@ -10,6 +10,13 @@ Supervisor: Joseph Bonello
 
 Code used for the development of galaxy morphology classification. Developed as part of a Final Year Project in partial fulfilment of B.Sc. IT (Software Development) at the University of Malta.
 
+## Description
+
+This project aims to classify images of galaxies into morphological classes. We use several Convolutional Neural Network architectures while also implementing undersampling and data augmentation.
+
+### Classification Scheme
+![Three class scheme](./galaxies_black_back.png)
+
 ## Datasets
 
 ### Images
